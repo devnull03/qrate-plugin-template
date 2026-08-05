@@ -1,0 +1,8 @@
+{
+  "languageMode": "nonstrict",
+  "lint": { "*": true },
+  "globals": ["qrate"],
+  "aliases": {
+    "types": "./types"
+  }
+}
