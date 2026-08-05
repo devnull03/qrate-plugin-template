@@ -9,7 +9,7 @@ deliberately dull — it exists so every hook has one worked instance you can de
 ## Starting a plugin
 
 ```sh
-git clone <this repo> my-plugin
+git clone https://github.com/devnull03/qrate-plugin-template my-plugin
 cd my-plugin
 rm -rf .git && git init
 ```
@@ -68,9 +68,9 @@ Entry points: `validate` (what is wrong with a column), `on_command` (a menu or 
 
 ## A real one
 
-[`qrate-islandora`](../qrate/plugins/islandora) checks columns against an Islandora site's
-controlled vocabularies. It uses the network, per-plugin storage, credentials, a column map, and
-suggestions — worth reading once you have outgrown this template.
+[`qrate-islandora-plugin`](https://github.com/devnull03/qrate-islandora-plugin) checks columns
+against an Islandora site's controlled vocabularies. It uses the network, per-plugin storage,
+credentials, a column map, and suggestions — worth reading once you have outgrown this template.
 
 > `types/qrate.lua` is a copy, not a shared dependency: Luau has no package manager and a plugin is
 > a folder somebody drops in by hand. When qrate's API version rises, take a fresh copy.
