@@ -6,6 +6,11 @@ definitions for the plugin API, and one small plugin that uses a handful of them
 The example flags cells longer than a length you set, on the columns you switch it on for. It is
 deliberately dull — it exists so every hook has one worked instance you can delete.
 
+qrate's own docs cover the same ground at more length: see
+[Plugins](https://github.com/devnull03/qrate/blob/main/docs/plugins/index.md) for a getting-started
+walkthrough and [the API reference](https://github.com/devnull03/qrate/blob/main/docs/plugins/api-reference.md)
+for every hook and host function.
+
 ## Starting a plugin
 
 ```sh
@@ -14,8 +19,8 @@ cd my-plugin
 rm -rf .git && git init
 ```
 
-Then drop the folder into qrate's plugins directory (**Help ▸ Open Plugins Folder**), or clone it
-straight in there. Restart qrate, or toggle the plugin off and on in **Settings ▸ Plugins**.
+Then drop the folder into qrate's plugins directory (**Extensions ▸ Plugins Folder**), or clone it
+straight in there. Restart qrate, or click **Extensions ▸ Reload Plugins**.
 
 **The folder name is the plugin's identity.** Its settings are stored under that name, so renaming
 the folder later orphans whatever it had stored. Pick the name first.
