@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check": "node --test && node scripts/package-plugin.mjs --check",
+    "test": "node --test",
+    "check": "npm test && node scripts/package-plugin.mjs --check",
     "package": "node scripts/package-plugin.mjs"
   }
 }

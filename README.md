@@ -44,7 +44,7 @@ package manifest before the first release. Keep the ID unchanged in all later re
 The package tool requires Node 22 and Git. It has no package dependencies.
 
 ```sh
-npm test
+npm run check
 npm run package
 ```
 

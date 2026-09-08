@@ -21,7 +21,7 @@ jobs:
         run: |
           version="$(node -p "require('./qrate-plugin.json').version")"
           test "$GITHUB_REF_NAME" = "v$version"
-          npm test
+          npm run check
       - name: Build package
         run: npm run package
       - name: Publish release assets
