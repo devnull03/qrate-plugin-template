@@ -35,6 +35,7 @@ package manifest before the first release. Keep the ID unchanged in all later re
 |---|---|
 | `init.lua` | The plugin. The table it returns is the descriptor that qrate reads at runtime. |
 | `qrate-plugin.json` | Static package metadata that qrate can inspect without running the plugin. |
+| `schemas/package.schema.json` | The registry package contract used by release review. |
 | `types/qrate.lua` | Type definitions for the whole plugin API, with the reasoning attached. |
 | `.luaurc` | Points luau-lsp at `types/`. |
 | `scripts/package-plugin.mjs` | Validates the package and creates a versioned ZIP and checksum. |

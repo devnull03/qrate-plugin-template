@@ -42,6 +42,13 @@ test('rejects unknown permissions', () => {
   );
 });
 
+test('rejects a package for a newer host API', () => {
+  assert.throws(
+    () => validateManifest({ ...valid, api_version: 2 }, fixture()),
+    /api_version must be 1/,
+  );
+});
+
 test('accepts the registry license allowlist and rejects other licenses', () => {
   const root = fixture();
   for (const license of ['MIT', 'Apache-2.0', 'GPL-3.0-or-later', 'Unlicense']) {

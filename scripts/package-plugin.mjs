@@ -41,8 +41,8 @@ export function validateManifest(manifest, root = ROOT) {
   const version = requiredString(manifest, 'version');
   if (!SEMVER.test(version)) throw new Error('version must use SemVer');
 
-  if (!Number.isInteger(manifest.api_version) || manifest.api_version < 1) {
-    throw new Error('api_version must be a positive integer');
+  if (manifest.api_version !== 1) {
+    throw new Error('api_version must be 1');
   }
 
   const entry = requiredString(manifest, 'entry');
