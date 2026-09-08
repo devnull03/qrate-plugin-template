@@ -28,6 +28,13 @@ test('accepts a valid package manifest', () => {
   assert.equal(validateManifest({ ...valid }, fixture()).id, valid.id);
 });
 
+test('rejects IDs without well-formed dotted segments', () => {
+  const root = fixture();
+  for (const id of ['plugin', 'org.-plugin', 'org.plugin-', 'org..plugin']) {
+    assert.throws(() => validateManifest({ ...valid, id }, root), /stable lowercase dotted/);
+  }
+});
+
 test('rejects traversal entry paths', () => {
   assert.throws(
     () => validateManifest({ ...valid, entry: '../init.lua' }, fixture()),

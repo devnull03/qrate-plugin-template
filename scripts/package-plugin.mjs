@@ -19,7 +19,7 @@ export const ALLOWED_LICENSES = new Set([
 ]);
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const ID = /^[a-z0-9]+(?:[._-][a-z0-9]+)+$/;
+const ID = /^[a-z0-9](?:[a-z0-9_-]*[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9_-]*[a-z0-9])?)+$/;
 const SEMVER = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/;
 
 const requiredString = (manifest, field) => {
