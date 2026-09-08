@@ -1,5 +1,5 @@
 --!strict
--- Type definitions for the `qrate` plugin API, as of api_version 1.
+-- Type definitions for the `qrate` plugin API, as of api_version 2.
 --
 -- This file is never loaded at runtime — the host installs `qrate` as a global before it sandboxes
 -- the VM, and there is no `require` path that would reach here. It exists so an editor running
@@ -228,9 +228,34 @@ export type Writes = {
 	user: any?,
 }
 
+--- One File ▸ Export item. Export contributions require API version 2.
+export type ExportSpec = {
+	--- Plugin-local ID passed to `export`.
+	id: string,
+	--- Text shown in the Export menu.
+	label: string,
+	--- One file name without a path.
+	suggested_name: string,
+}
+
+export type ExportColumn = {
+	name: string,
+	data_type: string,
+	--- This plugin's settings object for the column.
+	settings: any,
+}
+
+--- A fixed copy of the complete table.
+export type ExportSnapshot = {
+	title: string,
+	columns: { ExportColumn },
+	rows: { { string } },
+	settings: Settings,
+}
+
 --- The table `init.lua` returns. There is no manifest: this *is* the manifest.
 ---
---- At least one of `validate`, `on_command` or `suggest` has to be here, or the plugin does
+--- At least one of `validate`, `on_command`, `suggest` or `export` has to be here, or the plugin does
 --- nothing and is refused at load.
 export type Plugin = {
 	--- The descriptor shape this plugin is written against. Missing reads as 1. A version above
@@ -249,6 +274,7 @@ export type Plugin = {
 	menu: { MenuItem }?,
 	bar: { BarItem }?,
 	column_map: ColumnMapSpec?,
+	exports: { ExportSpec }?,
 
 	--- Runs over one column's values whenever the grid settles. Answers what is wrong with them.
 	---
@@ -262,6 +288,9 @@ export type Plugin = {
 	--- Offers completions for the cell being edited. The host debounces and drops answers that a
 	--- newer keystroke has superseded, so this may be as slow as one request.
 	suggest: ((ctx: SuggestContext) -> { string })?,
+
+	--- Returns a JSON-only value. qrate owns the save path and writes the JSON.
+	export: ((id: string, snapshot: ExportSnapshot) -> any)?,
 }
 
 return nil

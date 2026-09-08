@@ -28,6 +28,10 @@ test('accepts a valid package manifest', () => {
   assert.equal(validateManifest({ ...valid }, fixture()).id, valid.id);
 });
 
+test('accepts an API version 2 package manifest', () => {
+  assert.equal(validateManifest({ ...valid, api_version: 2 }, fixture()).api_version, 2);
+});
+
 test('rejects IDs without well-formed dotted segments', () => {
   const root = fixture();
   for (const id of ['plugin', 'org.-plugin', 'org.plugin-', 'org..plugin']) {
@@ -51,8 +55,8 @@ test('rejects unknown permissions', () => {
 
 test('rejects a package for a newer host API', () => {
   assert.throws(
-    () => validateManifest({ ...valid, api_version: 2 }, fixture()),
-    /api_version must be 1/,
+    () => validateManifest({ ...valid, api_version: 3 }, fixture()),
+    /api_version must be 1 or 2/,
   );
 });
 

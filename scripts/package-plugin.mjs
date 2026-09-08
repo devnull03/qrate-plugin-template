@@ -41,8 +41,8 @@ export function validateManifest(manifest, root = ROOT) {
   const version = requiredString(manifest, 'version');
   if (!SEMVER.test(version)) throw new Error('version must use SemVer');
 
-  if (manifest.api_version !== 1) {
-    throw new Error('api_version must be 1');
+  if (![1, 2].includes(manifest.api_version)) {
+    throw new Error('api_version must be 1 or 2');
   }
 
   const entry = requiredString(manifest, 'entry');
