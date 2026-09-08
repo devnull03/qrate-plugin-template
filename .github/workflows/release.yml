@@ -1,0 +1,35 @@
+name: Publish plugin package
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check tag and package version
+        run: |
+          version="$(node -p "require('./qrate-plugin.json').version")"
+          test "$GITHUB_REF_NAME" = "v$version"
+          npm test
+      - name: Build package
+        run: npm run package
+      - name: Publish release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --verify-tag \
+            --generate-notes \
+            dist/*.zip \
+            dist/*.sha256

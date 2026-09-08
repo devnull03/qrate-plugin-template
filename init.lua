@@ -5,7 +5,8 @@
 -- the host hands each one, and why — read that rather than guessing from this file. An editor
 -- running luau-lsp will complete against it; see the README.
 --
--- The table this file returns *is* the manifest. There is no other file the host reads.
+-- The table this file returns is the runtime descriptor. qrate-plugin.json is static package
+-- metadata for release tooling; the host still reads this Lua table when it loads the plugin.
 
 local MAX = 120
 

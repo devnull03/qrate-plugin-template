@@ -25,13 +25,59 @@ straight in there. Restart qrate, or click **Extensions ▸ Reload Plugins**.
 **The folder name is the plugin's identity.** Its settings are stored under that name, so renaming
 the folder later orphans whatever it had stored. Pick the name first.
 
+For distribution, `qrate-plugin.json` also gives the package a stable ID. Users can rename a manual
+folder, so the package ID does not come from that folder name. Change every example value in the
+package manifest before the first release. Keep the ID unchanged in all later releases.
+
 ## What is in here
 
 | File | |
 |---|---|
-| `init.lua` | The plugin. The table it returns *is* the manifest — there is no other file the host reads. |
+| `init.lua` | The plugin. The table it returns is the descriptor that qrate reads at runtime. |
+| `qrate-plugin.json` | Static package metadata that qrate can inspect without running the plugin. |
 | `types/qrate.lua` | Type definitions for the whole plugin API, with the reasoning attached. |
 | `.luaurc` | Points luau-lsp at `types/`. |
+| `scripts/package-plugin.mjs` | Validates the package and creates a versioned ZIP and checksum. |
+
+## Package a release
+
+The package tool requires Node 22 and Git. It has no package dependencies.
+
+```sh
+npm test
+npm run package
+```
+
+The command creates these files under `dist/`:
+
+```text
+work.dvnl.qrate.length-check-example-0.1.0.zip
+work.dvnl.qrate.length-check-example-0.1.0.zip.sha256
+```
+
+The ZIP contains only package files. It excludes repository workflows, tests, scripts, and local
+build output. Commit all package changes before you run the command.
+
+Push a tag such as `v0.1.0` after the tag matches the manifest version. The release workflow checks
+the package, creates the ZIP and checksum, and publishes both as GitHub Release assets.
+
+## License
+
+Every published plugin needs a license file at its package root. The package manifest must use one
+of these SPDX identifiers:
+
+- `Apache-2.0`
+- `BSD-2-Clause`
+- `BSD-3-Clause`
+- `CC-BY-4.0`
+- `GPL-3.0-only` or `GPL-3.0-or-later`
+- `LGPL-3.0-only` or `LGPL-3.0-or-later`
+- `MIT`
+- `Unlicense`
+- `Zlib`
+
+This template uses MIT. Replace `LICENSE` and the manifest value if you choose another accepted
+license.
 
 ## Editor setup
 

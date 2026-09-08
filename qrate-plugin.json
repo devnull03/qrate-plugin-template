@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "id": "work.dvnl.qrate.length-check-example",
+  "name": "Length check example",
+  "version": "0.1.0",
+  "api_version": 1,
+  "entry": "init.lua",
+  "description": "Flags cells that exceed a configurable length.",
+  "homepage": "https://github.com/devnull03/qrate-plugin-template",
+  "license": "MIT",
+  "permissions": []
+}
